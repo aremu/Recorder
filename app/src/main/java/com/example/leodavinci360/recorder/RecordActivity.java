@@ -27,7 +27,7 @@ public class RecordActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.sounds.clap);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.clap);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -47,7 +47,7 @@ public class RecordActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.sounds.);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.conga);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -67,7 +67,7 @@ public class RecordActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.sounds.);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.drumroll);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -81,13 +81,13 @@ public class RecordActivity extends ActionBarActivity {
             }
         });
 
-        button4 = (Button) findViewById(R.id.button3);
+        button4 = (Button) findViewById(R.id.button4);
         button4.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.sounds.);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.glass);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -101,13 +101,13 @@ public class RecordActivity extends ActionBarActivity {
             }
         });
 
-        button5 = (Button) findViewById(R.id.button3);
+        button5 = (Button) findViewById(R.id.button5);
         button5.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.sounds.);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.tap);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -121,13 +121,13 @@ public class RecordActivity extends ActionBarActivity {
             }
         });
 
-        button6 = (Button) findViewById(R.id.button4);
+        button6 = (Button) findViewById(R.id.button6);
         button6.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.sounds.);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.bell);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -141,13 +141,13 @@ public class RecordActivity extends ActionBarActivity {
             }
         });
 
-        button7 = (Button) findViewById(R.id.button5);
+        button7 = (Button) findViewById(R.id.button7);
         button7.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.sounds.);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -160,6 +160,8 @@ public class RecordActivity extends ActionBarActivity {
 
             }
         });
+
+
     }
 
     @Override
