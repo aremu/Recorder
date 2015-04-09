@@ -141,26 +141,6 @@ public class RecordActivity extends ActionBarActivity {
             }
         });
 
-        button7 = (Button) findViewById(R.id.button7);
-        button7.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-
-                play = MediaPlayer.create(RecordActivity.this, R.raw.);
-                play.start();
-                play.setOnCompletionListener(new OnCompletionListener() {
-
-                    @Override
-                    public void onCompletion(MediaPlayer play) {
-                        play.release();
-
-                    }
-                });
-
-            }
-        });
-
 
     }
 
