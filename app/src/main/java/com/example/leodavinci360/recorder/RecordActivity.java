@@ -1,24 +1,33 @@
 package com.example.leodavinci360.recorder;
 
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import java.io.File;
 
 
 public class RecordActivity extends ActionBarActivity {
 
     private Button button1, button2, button3, button4, button5, button6, button7;
     private MediaPlayer play;
+    private MediaRecorder record;
+    private String FILE;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record);
+
+
+        FILE =Environment.getExternalStorageDirectory() + "/tempRecord.3gpp";
 
 
         button1 = (Button) findViewById(R.id.button1);
@@ -139,30 +148,97 @@ public class RecordActivity extends ActionBarActivity {
                 });
 
             }
+
         });
 
 
-    }
+        button7 = (Button) findViewById(R.id.button7);
+        button7.setOnClickListener(new View.OnClickListener() {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_record, menu);
-        return true;
-    }
+            @Override
+            public void onClick(View v) {
+                if (button7.getText().toString().equals("Record")) {
+                    startRecord();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+                } else if (button7.getText().toString().equals("End")) {
+                    stopRecord();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+                } else if (button7.getText().toString().equals("Play")) {
+                    startPlayback();
+
+                } else {
+                    stopPlayback();
+                }
+
+
+            }
+
+    });
+
+}
+        public void startRecord() throws Exception {
+            if (record != null) {
+                record.release();
+            }
+
+
+            File fileOut = new File(FILE);
+            if (fileOut != null) {
+                fileOut.delete();
+            }
+
+            record = new MediaRecorder();
+            record.setAudioSource(MediaRecorder.AudioSource.MIC);
+            record.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            record.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB); //Runs on versions before 2.3
+            record.setOutputFile(FILE); //path
+
+            record.prepare();
+            record.start();
+        }
+
+        public void stopRecord()
+        {   record.stop();
+            record.release();
+        }
+
+        public void startPlayback() throws Exception {
+            if (play != null) {
+                play.stop();
+                play.release();
+            }
+            play = new MediaPlayer();
+            play.setDataSource(FILE);
+            play.prepare();
+            play.start();
+        }
+
+        public void stopPlayback()
+        {
+
+        }
+
+
+        @Override
+        public boolean onCreateOptionsMenu (Menu menu){
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.menu_record, menu);
             return true;
         }
 
-        return super.onOptionsItemSelected(item);
+        @Override
+        public boolean onOptionsItemSelected (MenuItem item){
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
+
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
+
+            return super.onOptionsItemSelected(item);
+        }
     }
-}
+
