@@ -6,6 +6,7 @@ import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -158,16 +159,32 @@ public class RecordActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if (button7.getText().toString().equals("Record")) {
-                    startRecord();
+                    try {
+                        startRecord();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e("RecordActivity", "Record error");
+                    }
+
+                    //txtRecord.setText("Recording...");
+                    button7.setText("End");
 
                 } else if (button7.getText().toString().equals("End")) {
                     stopRecord();
+                    button7.setText("Play");
+                    //txtRecord.setText("");
 
                 } else if (button7.getText().toString().equals("Play")) {
-                    startPlayback();
+                    try {
+                        startPlayback();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    button7.setText("Stop");
 
                 } else {
                     stopPlayback();
+                    button7.setText("Record");
                 }
 
 
@@ -200,6 +217,7 @@ public class RecordActivity extends ActionBarActivity {
         public void stopRecord()
         {   record.stop();
             record.release();
+            record = null;
         }
 
         public void startPlayback() throws Exception {
@@ -211,6 +229,14 @@ public class RecordActivity extends ActionBarActivity {
             play.setDataSource(FILE);
             play.prepare();
             play.start();
+            play.setOnCompletionListener(new OnCompletionListener() {
+
+                @Override
+                public void onCompletion(MediaPlayer play) {
+                    play.release();
+
+                }
+            });
         }
 
         public void stopPlayback()
