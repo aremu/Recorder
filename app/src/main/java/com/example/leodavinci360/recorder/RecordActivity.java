@@ -28,7 +28,7 @@ public class RecordActivity extends ActionBarActivity {
         setContentView(R.layout.activity_record);
 
 
-        FILE =Environment.getExternalStorageDirectory() + "/tempRecord.3gpp";
+        FILE =Environment.getExternalStorageDirectory() + "/tempRecord.mpeg_4";
 
 
         button1 = (Button) findViewById(R.id.button1);
@@ -97,7 +97,7 @@ public class RecordActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.raw.glass);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.bell);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -117,7 +117,7 @@ public class RecordActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.raw.tap);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.drum);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -137,7 +137,7 @@ public class RecordActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
 
-                play = MediaPlayer.create(RecordActivity.this, R.raw.bell);
+                play = MediaPlayer.create(RecordActivity.this, R.raw.gong);
                 play.start();
                 play.setOnCompletionListener(new OnCompletionListener() {
 
@@ -166,13 +166,11 @@ public class RecordActivity extends ActionBarActivity {
                         Log.e("RecordActivity", "Record error");
                     }
 
-                    //txtRecord.setText("Recording...");
                     button7.setText("End");
 
                 } else if (button7.getText().toString().equals("End")) {
                     stopRecord();
                     button7.setText("Play");
-                    //txtRecord.setText("");
 
                 } else if (button7.getText().toString().equals("Play")) {
                     try {
@@ -206,7 +204,7 @@ public class RecordActivity extends ActionBarActivity {
 
             record = new MediaRecorder();
             record.setAudioSource(MediaRecorder.AudioSource.MIC);
-            record.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            record.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             record.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB); //Runs on versions before 2.3
             record.setOutputFile(FILE); //path
 
@@ -233,7 +231,6 @@ public class RecordActivity extends ActionBarActivity {
 
                 @Override
                 public void onCompletion(MediaPlayer play) {
-                    play.release();
 
                 }
             });
